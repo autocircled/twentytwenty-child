@@ -7,8 +7,8 @@ $parent_style = 'parent-style';
 		get_stylesheet_directory_uri() . '/style.css',
 		array( $parent_style ),
 		wp_get_theme()->get('Version') );
-        wp_register_script('google_adsense', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', array(), null, false);
-        wp_enqueue_script('google_adsense');
+        //wp_register_script('google_adsense', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', array(), null, false);
+        //wp_enqueue_script('google_adsense');
 	}
 add_action( 'wp_enqueue_scripts', 'twenty_twenty_child_enqueue_child_styles' );
 
@@ -123,7 +123,7 @@ add_action('wp_body_open', 'google_analytics');
 
 //Insert ads after second paragraph of single post content.
  
-add_filter( 'the_content', 'prefix_insert_post_ads' );
+//add_filter( 'the_content', 'prefix_insert_post_ads' );
  
 function prefix_insert_post_ads( $content ) {
      
