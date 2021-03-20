@@ -211,3 +211,10 @@ add_filter( 'c2c_blog_time_format', 'my_blog_time_format' );
 function my_blog_time_format( $format ) {
     return 'M d, Y h:i:s A';
 }
+
+require_once __DIR__ . '/classes/class-widget-related-jobs.php';
+
+function register_dinjob_widgets() {
+    register_widget( 'DinJob_Related_Jobs' );
+}
+add_action( 'widgets_init', 'register_dinjob_widgets' );
