@@ -117,6 +117,12 @@ function taxonomy_title_filter(){
         return $title;
 }
 
+if( !function_exists('is_amp_endpoint')){
+    function is_amp_endpoint(){
+        return false;
+    }
+}
+
 if (!function_exists('google_analytics')){
     function google_analytics(){
         $output = <<<HTML
