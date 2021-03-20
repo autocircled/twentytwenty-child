@@ -1,18 +1,38 @@
 <?php
 function twenty_twenty_child_enqueue_child_styles() {
-$parent_style = 'parent-style'; 
+    $parent_style = 'parent-style'; 
 	wp_enqueue_style($parent_style, get_template_directory_uri() . '/style.css' );
-	wp_enqueue_style( 
-		'child-style', 
-		get_stylesheet_directory_uri() . '/style.css',
-		array( $parent_style ),
-		wp_get_theme()->get('Version') );
-        //wp_register_script('google_adsense', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', array(), null, false);
-        //wp_enqueue_script('google_adsense');
+    //wp_register_script('google_adsense', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', array(), null, false);
+    //wp_enqueue_script('google_adsense');
 	}
 add_action( 'wp_enqueue_scripts', 'twenty_twenty_child_enqueue_child_styles' );
 
 /*Write here your own functions */
+/**
+ * Add a sidebar.
+ */
+function twenty20_child_theme_setup() {
+    $shared_args = array(
+		'before_title'  => '<h2 class="widget-title subheading heading-size-3">',
+		'after_title'   => '</h2>',
+		'before_widget' => '<div class="widget %2$s"><div class="widget-content">',
+		'after_widget'  => '</div></div>',
+	);
+
+	// Main Sidebar #1.
+	register_sidebar(
+		array_merge(
+			$shared_args,
+			array(
+				'name'        => __( 'Main Sidebar', 'twentytwenty' ),
+				'id'          => 'main-sidebar-1',
+				'description' => __( 'Widgets in this area will be displayed in the main sidebar.', 'twentytwenty' ),
+			)
+		)
+	);
+}
+add_action( 'widgets_init', 'twenty20_child_theme_setup' );
+
 function rtp_rssv_scripts() {
     global $wp_scripts;
     if (!is_a($wp_scripts, 'WP_Scripts'))

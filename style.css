@@ -157,9 +157,8 @@ h2.heading-size-6 {
 
 }
 .job-info {
-	margin: 0 auto 30px;
 	background: #dfdfdf;
-	padding: 20px;
+	padding: 20px 0;
 }
 .job-info:after {
     content: "";
@@ -192,48 +191,67 @@ hr {
 li {
     font-size: 1.4rem;
 }
+.job-field p {
+    margin: 0;
+}
+.job-info .job-field:not(:last-child) p {
+    margin: 0 0 20px;
+}
+.widget-area {
+    padding: 2rem;
+    background: #dfdfdf;
+}
 @media ( min-width: 700px ) {
 
     .single-jobs .entry-header {
-	padding: 1rem 0;
+        padding: 4rem 0;
         background: #000;
-}
-.entry-title.heading-size-5 {
-	color: #fff;
-	font-weight: 400;
-}
-.single-jobs .job-header a,
-.single-jobs .job-header p {
-	color: #d2d2d2 !important;
-}
+    }
+    .entry-title.heading-size-5 {
+        color: #fff;
+        font-weight: 400;
+    }
+    .single-jobs .job-header a,
+    .single-jobs .job-header p {
+        color: #d2d2d2 !important;
+    }
 
-h2.entry-title {
-	font-size: 2.4rem;
-}
-.post-inner {
-	padding-top: 1rem;
-}
-hr {
-	margin: 2rem auto;
-}
-.archive-header {
-	padding: 1rem 0;
-	background: #151515;
-        margin-bottom: 8rem;
-}
-.archive-title {
-	color: #fff;
-}
-body:not(.singular) main > article:first-of-type {
-	padding: 0;
-}
-.section-inner.medium {
-    max-width: 120rem;
-}
-.entry-content > :not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
-	max-width: 120rem;
-	width: calc(100% - 8rem);
-}
+    h2.entry-title {
+        font-size: 2.4rem;
+    }
+    hr {
+        margin: 2rem auto;
+    }
+    .archive-header {
+        padding: 1rem 0;
+        background: #151515;
+            margin-bottom: 8rem;
+    }
+    .archive-title {
+        color: #fff;
+    }
+    body:not(.singular) main > article:first-of-type {
+        padding: 0;
+    }
+    .section-inner.medium {
+        max-width: 120rem;
+    }
+    .entry-content > :not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+        max-width: 120rem;
+        width: calc(100% - 8rem);
+    }
+    .entry-content > .job-info {
+        width: 100% !important;
+    }
+    .site {
+        display: grid;
+        grid-template-columns: auto 33%;
+        column-gap: 20px;
+        grid-template-areas: "main sidebar";
+    }
+    .widget-area {
+        padding: 4rem;
+    }
 }
 article.jobs {
     margin-bottom: 50px;

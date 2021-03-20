@@ -110,6 +110,7 @@ if (is_search() || !is_singular() || is_front_page()) {
 } else {
 ?>
             <div class="job-info">
+                <div class="section-inner">
                     <div class="col left">
                         <div class="job-field">
                             <h2 class="heading-size-6">Seniority level</h2>
@@ -141,6 +142,7 @@ if (is_search() || !is_singular() || is_front_page()) {
                         </div>
                     </div>
                 </div>
+            </div>
             <?php
     the_content();
     ?>
