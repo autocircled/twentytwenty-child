@@ -37,8 +37,39 @@ class DinJob_Related_Jobs extends WP_Widget {
         if ( ! empty( $title ) ) {
             echo $before_title . $title . $after_title;
         }
-        var_dump(get_the_ID(), $args, $instance);
-        echo __( 'Hello, World!', 'text_domain' );
+        $terms = wp_get_post_terms( get_the_ID(), $instance['job_taxonomy_list'], array( 'hide_empty' => false, ) );
+        foreach ($terms as $term) {
+            # code...
+            $term_ids[] = $term->term_id;
+        }
+        // var_dump($term_ids);
+        $new_query = get_posts(
+            array(
+                'post_type' => 'jobs',
+                'include' => [],
+                // 'numberposts' => -1,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => $instance['job_taxonomy_list'],
+                        'terms' => $term_ids,
+                        'field' => 'term_id',
+                    )
+                ),
+                'orderby' => 'title',
+                'order' => 'ASC'
+
+            )
+        );
+        // var_dump($terms);
+        // var_dump($new_query);
+        // echo __( 'Hello, World!', 'text_domain' );
+        echo '<ul>';
+        foreach ( $new_query as $item ) {
+            # code...
+            // var_dump($item);
+            echo '<li><a href="'. get_the_permalink( $item->ID ) .'">'. get_the_title( $item->ID ) .'</li>';
+        }
+        echo '</ul>';
         echo $after_widget;
     }
  
