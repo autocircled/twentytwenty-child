@@ -88,7 +88,7 @@ get_header();
                         
     if ( $i == 2 || $i == 5 || $i == 7 || $i == 9) {
 //				echo '<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />';
-                            get_template_part('template-ads/ads', 'archive');
+                            //get_template_part('template-ads/ads', 'archive');
 			}
                         
 		}
