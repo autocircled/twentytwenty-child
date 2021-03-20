@@ -52,6 +52,7 @@ function custom_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
+// This is a test comment
 // add filters to search query
 add_action( 'pre_get_posts', 'advanced_search_query' );
 function advanced_search_query( $query ) {
