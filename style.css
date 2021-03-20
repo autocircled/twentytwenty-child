@@ -246,7 +246,6 @@ li {
     .site {
         display: grid;
         grid-template-columns: auto 33%;
-        column-gap: 20px;
         grid-template-areas: "main sidebar";
     }
     .widget-area {
