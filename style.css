@@ -201,6 +201,23 @@ li {
     padding: 2rem;
     background: #dfdfdf;
 }
+.post-meta-wrapper {
+    max-width: 100%;
+}
+.entry-content > .alignleft, .entry-content > p .alignleft, .entry-content > .wp-block-image .alignleft,
+.entry-content > .alignright, .entry-content > p .alignright, .entry-content > .wp-block-image .alignright {
+    position: relative;
+    max-width: 100%;
+    left: 0;
+}
+.entry-content > .alignleft, .entry-content > p .alignleft, .entry-content > .wp-block-image .alignleft {
+    margin-left: 2rem;
+    float: left;
+}
+.entry-content > .alignright, .entry-content > p .alignright, .entry-content > .wp-block-image .alignright {
+    margin-right: 2rem;
+    float: right;
+}
 @media ( min-width: 700px ) {
 
     .single-jobs .entry-header {
@@ -250,6 +267,12 @@ li {
     }
     .widget-area {
         padding: 4rem;
+    }
+    .entry-content > .alignleft, .entry-content > p .alignleft, .entry-content > .wp-block-image .alignleft {
+        margin-left: 4rem;
+    }
+    .entry-content > .alignright, .entry-content > p .alignright, .entry-content > .wp-block-image .alignright {
+        margin-right: 4rem;
     }
 }
 article.jobs {
