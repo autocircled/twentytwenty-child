@@ -218,6 +218,19 @@ li {
     margin-right: 2rem;
     float: right;
 }
+.widget.dinjob_related_jobs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.widget.dinjob_related_jobs ul.job-items li a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+.widget.dinjob_related_jobs ul.job-items li a .job-meta-title {
+    font-size: 1.8rem;
+}
 @media ( min-width: 700px ) {
 
     .single-jobs .entry-header {

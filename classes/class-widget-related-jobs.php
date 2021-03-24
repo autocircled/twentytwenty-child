@@ -42,7 +42,6 @@ class DinJob_Related_Jobs extends WP_Widget {
             # code...
             $term_ids[] = $term->term_id;
         }
-        // var_dump($term_ids);
         $new_query = get_posts(
             array(
                 'post_type' => 'jobs',
@@ -60,14 +59,20 @@ class DinJob_Related_Jobs extends WP_Widget {
 
             )
         );
-        // var_dump($terms);
-        // var_dump($new_query);
-        // echo __( 'Hello, World!', 'text_domain' );
-        echo '<ul>';
+        $job_meta = '';
+        if( is_array( $term_ids ) ){
+            foreach ($term_ids as $id){
+                $job_meta .= get_term( $id )->name;
+                $job_meta .= $id === end( $term_ids) ? '': ', ';
+            }
+        }
+        echo '<ul class="job-items">';
         foreach ( $new_query as $item ) {
-            # code...
-            // var_dump($item);
-            echo '<li><a href="'. get_the_permalink( $item->ID ) .'">'. get_the_title( $item->ID ) .'</li>';
+            echo '<li class="job-item">'
+            . '<a href="'. get_the_permalink( $item->ID ) .'">'
+            . '<span class="job-meta-title">'. get_the_title( $item->ID ) .'</span>'
+            . '<span class="job-meta-info">'. $job_meta .'</span>'
+            . '</a></li>';
         }
         echo '</ul>';
         echo $after_widget;
