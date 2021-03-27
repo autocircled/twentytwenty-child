@@ -144,7 +144,7 @@ HTML;
     }
 }
 
-add_action('wp_body_open', 'google_analytics');
+//add_action('wp_body_open', 'google_analytics');
 
 
 
@@ -224,3 +224,79 @@ function register_dinjob_widgets() {
     register_widget( 'DinJob_Related_Jobs' );
 }
 add_action( 'widgets_init', 'register_dinjob_widgets' );
+
+if ( ! function_exists( 'dinjob_posted_on' ) ) :
+	/**
+	 * Prints HTML with meta information for the current post-date/time.
+	 */
+	function dinjob_posted_on() {
+		
+
+		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		}
+
+		
+
+		$post_date = get_the_time('U');
+        $delta = time() - $post_date;
+		$publish_time = '';
+        if ( $delta < 60 ) {
+            $publish_time = 'Less than a minute ago';
+        }
+        elseif ($delta > 60 && $delta < 120){
+            $publish_time = 'About a minute ago';
+        }
+        elseif ($delta > 120 && $delta < (60*60)){
+            $publish_time = strval(round(($delta/60),0)) . ' minutes ago';
+        }
+        elseif ($delta > (60*60) && $delta < (120*60)){
+            $publish_time = 'About an hour ago';
+        }
+        elseif ($delta > (120*60) && $delta < (24*60*60)){
+            $publish_time = strval(round(($delta/3600),0)) . ' hours ago';
+        }
+        elseif ($delta > (24*60*60) && $delta < (48*60*60)){
+            $publish_time = '1 day ago';
+        }
+        elseif ($delta > (48*60*60) && $delta < (7*24*60*60)){
+            $publish_time = strval(round(($delta/86400),0)) . ' days ago';
+        }
+        elseif ($delta > (7*24*60*60) && $delta < (14*24*60*60)){
+            $publish_time = '1 week ago';
+        }
+        elseif ($delta > (14*24*60*60) && $delta < (28*24*60*60)){
+            $publish_time = strval(round(($delta/604800),0)) . ' weeks ago';
+        }
+        elseif ($delta > (28*24*60*60) && $delta < (30*24*60*60)){
+            $publish_time = strval(round(($delta/86400),0)) . ' days ago';
+        }
+        elseif ($delta > (30*24*60*60) && $delta < (60*24*60*60)){
+            $publish_time = '1 month ago';
+        }
+        elseif ($delta > (60*24*60*60) && $delta < (12*30*24*60*60)){
+            $publish_time = strval(round(($delta/2592000),0)) . ' months ago';
+        }
+        else {
+            $publish_time = 'Published on ' . get_the_time('j M y g:i a');
+        }
+
+		$time_string = sprintf(
+			$time_string,
+			esc_attr( get_the_date( DATE_W3C ) ),
+			// esc_html( get_the_date() ),
+			esc_html( $publish_time ),
+			esc_attr( get_the_modified_date( DATE_W3C ) ),
+			esc_html( get_the_modified_date() )
+		);
+		$posted_on = sprintf(
+			/* translators: %s: post date. */
+			esc_html_x( '%s', 'post date', 'dinjob' ),
+			'<span class="publish-time">' . $time_string . '</span>'
+		);
+
+		return '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+	}
+endif;

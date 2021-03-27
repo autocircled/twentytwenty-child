@@ -56,7 +56,7 @@ if ($job_industries) {
 }
 ?>
 
-<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>" data-href="<?php echo esc_url(get_permalink()); ?>">
 <?php
 $entry_header_classes = '';
 

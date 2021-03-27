@@ -42,10 +42,17 @@ class DinJob_Related_Jobs extends WP_Widget {
             # code...
             $term_ids[] = $term->term_id;
         }
+        
+        /**
+         * Retrive all jobs based on taxonomy terms
+         * 
+         * See this for args https://developer.wordpress.org/reference/functions/get_posts/
+         */
         $new_query = get_posts(
             array(
                 'post_type' => 'jobs',
                 'include' => [],
+                'exclude' => [ get_the_ID() ], //exclude the currently viewing job
                 // 'numberposts' => -1,
                 'tax_query' => array(
                     array(
@@ -59,22 +66,38 @@ class DinJob_Related_Jobs extends WP_Widget {
 
             )
         );
-        $job_meta = '';
-        if( is_array( $term_ids ) ){
-            foreach ($term_ids as $id){
-                $job_meta .= get_term( $id )->name;
-                $job_meta .= $id === end( $term_ids) ? '': ', ';
-            }
-        }
+        
+        
+        // var_dump($company[0]->name);
         echo '<ul class="job-items">';
+        
         foreach ( $new_query as $item ) {
+            $company = get_the_terms( $item->ID, 'company' );
+
+            $locations = wp_get_post_terms( $item->ID, 'location', array( 'hide_empty' => false, ) );
+            $location_ids = [];
+            foreach ($locations as $location) {
+                # code...
+                $location_ids[] = $location->term_id;
+            }
+            $location_meta = '';
+            if( is_array( $location_ids ) ){
+                foreach ($location_ids as $id){
+                    $location_meta .= get_term( $id )->name;
+                    $location_meta .= $id === end( $location_ids ) ? '': ', ';
+                }
+            }
+
             echo '<li class="job-item">'
             . '<a href="'. get_the_permalink( $item->ID ) .'">'
             . '<span class="job-meta-title">'. get_the_title( $item->ID ) .'</span>'
-            . '<span class="job-meta-info">'. $job_meta .'</span>'
+            . '<span class="job-company-meta">'. $company[0]->name .'</span>'
+            . '<span class="job-location-meta">'. $location_meta .'</span>'
+            . dinjob_posted_on()
             . '</a></li>';
         }
         echo '</ul>';
+        // echo '<a href="" class="">See All Jobs</a>';
         echo $after_widget;
     }
  

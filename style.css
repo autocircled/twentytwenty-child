@@ -199,7 +199,6 @@ li {
 }
 .widget-area {
     padding: 2rem;
-    background: #dfdfdf;
 }
 .post-meta-wrapper {
     max-width: 100%;
@@ -231,6 +230,7 @@ li {
 .widget.dinjob_related_jobs ul.job-items li a .job-meta-title {
     font-size: 1.8rem;
 }
+
 @media ( min-width: 700px ) {
 
     .single-jobs .entry-header {
@@ -254,11 +254,10 @@ li {
     }
     .archive-header {
         padding: 1rem 0;
-        background: #151515;
-            margin-bottom: 8rem;
+        margin-bottom: 4rem;
     }
     .archive-title {
-        color: #fff;
+        color: #000;
     }
     body:not(.singular) main > article:first-of-type {
         padding: 0;
@@ -277,6 +276,8 @@ li {
         display: grid;
         grid-template-columns: auto 33%;
         grid-template-areas: "main sidebar";
+        max-width: 1140px;
+        margin: 0 auto;
     }
     .widget-area {
         padding: 4rem;
@@ -287,7 +288,13 @@ li {
     .entry-content > .alignright, .entry-content > p .alignright, .entry-content > .wp-block-image .alignright {
         margin-right: 4rem;
     }
-}
-article.jobs {
-    margin-bottom: 50px;
+    body:not(.singular) main > article {
+        background: #fff;
+        padding: 2rem 0 !important;
+        border-bottom: 1px solid #dfb6b6;
+        transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+    body:not(.singular) main > article:hover {
+        background: #f7f7f7;
+    }
 }
