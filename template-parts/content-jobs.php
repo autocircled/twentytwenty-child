@@ -98,7 +98,7 @@ if (is_search() || !is_singular() || is_front_page()) {
         </div><!-- .entry-header-inner -->
 
     </header><!-- .entry-header -->
-    <?php //get_template_part('template-ads/ads', 'archive'); ?>
+    <?php get_template_part('template-ads/ads', 'archive'); ?>
 
     <div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
 

@@ -186,5 +186,5 @@
 		// Output the menu modal.
 		get_template_part( 'template-parts/modal-menu' );
                 if(!is_singular()){
-                    //get_template_part('template-ads/ads', 'archive');
+                    get_template_part('template-ads/ads', 'archive');
                 }
