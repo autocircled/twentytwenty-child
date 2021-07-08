@@ -1,5 +1,5 @@
 <div class="section-inner section-ads">
-                <!-- Horizontal Ad archive -->
+                <!-- In-feed Ad -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-format="fluid"

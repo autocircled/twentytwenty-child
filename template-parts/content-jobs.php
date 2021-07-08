@@ -91,6 +91,7 @@ if (is_search() || !is_singular() || is_front_page()) {
     if ($job_locations) {
         echo '<p>' . $location_full . '</p>';
     }
+	
 }
 ?>
             </div><!-- .job-header -->
@@ -98,8 +99,12 @@ if (is_search() || !is_singular() || is_front_page()) {
         </div><!-- .entry-header-inner -->
 
     </header><!-- .entry-header -->
-    <?php get_template_part('template-ads/ads', 'archive'); ?>
-
+    <?php 
+	
+	if (is_singular()) {
+    	get_template_part('template-ads/ads', 'archive');
+	} ?>
+	
     <div class="post-inner <?php echo is_page_template('templates/template-full-width.php') ? '' : 'thin'; ?> ">
 
         <div class="entry-content">
@@ -108,6 +113,7 @@ if (is_search() || !is_singular() || is_front_page()) {
 if (is_search() || !is_singular() || is_front_page()) {
     echo '<p>' . get_excerpt() . '</p>';
 } else {
+	
 ?>
             <div class="job-info">
                 <div class="section-inner">
@@ -145,8 +151,22 @@ if (is_search() || !is_singular() || is_front_page()) {
             </div>
             <?php
     the_content();
+	$save_on_fb = '<div class="fb-save" data-uri="' . esc_url(get_permalink()) . '" data-size="large"></div>';
+	echo $save_on_fb;
     ?>
-                
+			<div class="content-footer-wrap">
+			<div class="footer-ad">
+			<!-- Dinjob Footer Ad -->
+			<ins class="adsbygoogle"
+				 style="display:block"
+				 data-ad-client="ca-pub-1647729644239136"
+				 data-ad-slot="9289869689"
+				 data-ad-format="auto"
+				 data-full-width-responsive="true"></ins>
+			<script>
+				 (adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+			</div>
                 <div class="apply-now">
     <?php
     $platform = get_field('platform');
@@ -158,6 +178,7 @@ if (is_search() || !is_singular() || is_front_page()) {
     ?>
                     <a href="<?php the_field('apply_now'); ?>" target="_blank" class="wp-block-button__link" rel="ugc nofollow"><?php echo $button_text; ?></a>
                 </div>
+			</div>
                 <?php
             }
             ?>
