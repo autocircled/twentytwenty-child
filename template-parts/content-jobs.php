@@ -34,26 +34,26 @@ if ($job_locations) {
 }
 
 // Job Type
-$job_types = get_the_terms($post->ID, 'job_type');
-if ($job_types) {
-    $all_job_types = '';
-    $k = count($job_types) - 1;
-    foreach ($job_types as $type) {
-        $all_job_types .= '<a href="'. get_term_link($type, 'job_type') .'">' . $type->name . '</a>' . ($k > 0 ? ', ' : '');
-        $k--;
-    }
-}
+// $job_types = get_the_terms($post->ID, 'job_type');
+// if ($job_types) {
+//     $all_job_types = '';
+//     $k = count($job_types) - 1;
+//     foreach ($job_types as $type) {
+//         $all_job_types .= '<a href="'. get_term_link($type, 'job_type') .'">' . $type->name . '</a>' . ($k > 0 ? ', ' : '');
+//         $k--;
+//     }
+// }
 
 // Job Industry
-$job_industries = get_the_terms($post->ID, 'job_industry');
-if ($job_industries) {
-    $all_job_industries = '';
-    $l = count($job_industries) - 1;
-    foreach ($job_industries as $industry) {
-        $all_job_industries .= '<a href="'. get_term_link($industry, 'job_industry') .'">' . $industry->name . '</a>' . ($l > 0 ? ', ' : '');
-        $l--;
-    }
-}
+// $job_industries = get_the_terms($post->ID, 'job_industry');
+// if ($job_industries) {
+//     $all_job_industries = '';
+//     $l = count($job_industries) - 1;
+//     foreach ($job_industries as $industry) {
+//         $all_job_industries .= '<a href="'. get_term_link($industry, 'job_industry') .'">' . $industry->name . '</a>' . ($l > 0 ? ', ' : '');
+//         $l--;
+//     }
+// }
 ?>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>" data-href="<?php echo esc_url(get_permalink()); ?>">
@@ -101,7 +101,7 @@ if (is_search() || !is_singular() || is_front_page()) {
     </header><!-- .entry-header -->
     <?php 
 	
-	if (is_singular()) {
+	if ( is_singular() && SHOW_DINJOB_ADS ) {
     	get_template_part('template-ads/ads', 'archive');
 	} ?>
 	
@@ -109,77 +109,44 @@ if (is_search() || !is_singular() || is_front_page()) {
 
         <div class="entry-content">
 
-<?php
-if (is_search() || !is_singular() || is_front_page()) {
-    echo '<p>' . get_excerpt() . '</p>';
-} else {
-	
-?>
-            <div class="job-info">
-                <div class="section-inner">
-                    <div class="col left">
-                        <div class="job-field">
-                            <h2 class="heading-size-6">Seniority level</h2>
-                            <p>
-                                <?php
-                                    $seniority_level = get_field_object('seniority_level');
-                                    echo $seniority_level['value'];
-                                ?>
-                            </p>
-                        </div>
-                        <div class="job-field">
-                            <h2 class="heading-size-6">Employment type</h2>
-                            <p>
-                                <?php 
-                                    $employment_type = get_field_object('employment_type');
-                                    echo $employment_type['value']; 
-                                ?>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col right">
-                        <div class="job-field">
-                            <h2 class="heading-size-6">Job Functionality</h2>
-                            <p><?php echo $all_job_types; ?></p>
-                        </div>
-                        <div class="job-field">
-                            <h2 class="heading-size-6">Industry</h2>
-                            <p><?php echo $all_job_industries; ?></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <?php
-    the_content();
-	$save_on_fb = '<div class="fb-save" data-uri="' . esc_url(get_permalink()) . '" data-size="large"></div>';
-	echo $save_on_fb;
-    ?>
-			<div class="content-footer-wrap">
-			<div class="footer-ad">
-			<!-- Dinjob Footer Ad -->
-			<ins class="adsbygoogle"
-				 style="display:block"
-				 data-ad-client="ca-pub-1647729644239136"
-				 data-ad-slot="9289869689"
-				 data-ad-format="auto"
-				 data-full-width-responsive="true"></ins>
-			<script>
-				 (adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
-			</div>
-                <div class="apply-now">
-    <?php
-    $platform = get_field('platform');
-    if ($platform == 'other') {
-        $button_text = 'Apply on company website';
-    }else {
-        $button_text = 'Apply with LinkedIn';
-    }
-    ?>
-                    <a href="<?php the_field('apply_now'); ?>" target="_blank" class="wp-block-button__link" rel="ugc nofollow"><?php echo $button_text; ?></a>
+            if (is_search() || !is_singular() || is_front_page()) {
+                echo '<p>' . get_excerpt() . '</p>';
+            } else {
+                
+                the_content();
+                $save_on_fb = '<div class="fb-save" data-uri="' . esc_url(get_permalink()) . '" data-size="large"></div>';
+                echo $save_on_fb;
+                
+                ?>
+                <div class="content-footer-wrap">
+                    <?php if( SHOW_DINJOB_ADS ) : ?>
+                    <div class="footer-ad">
+                        <!-- Dinjob Footer Ad -->
+                        <ins class="adsbygoogle"
+                            style="display:block"
+                            data-ad-client="ca-pub-1647729644239136"
+                            data-ad-slot="9289869689"
+                            data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <?php endif; ?>
+                    <div class="apply-now">
+                        <?php
+                        $platform = get_field('platform');
+                        if ($platform == 'other') {
+                            $button_text = 'Apply on company website';
+                        }else {
+                            $button_text = 'Apply with LinkedIn';
+                        }
+                        ?>
+                        <a href="<?php the_field('apply_now'); ?>" target="_blank" class="wp-block-button__link" rel="ugc nofollow"><?php echo $button_text; ?></a>
+                    </div>
                 </div>
-			</div>
-                <?php
+            <?php
             }
             ?>
 

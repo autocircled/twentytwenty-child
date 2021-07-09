@@ -1,10 +1,13 @@
 <?php
+define( 'SHOW_DINJOB_ADS', true );
 function twenty_twenty_child_enqueue_child_styles() {
     $parent_style = 'parent-style'; 
 	wp_enqueue_style($parent_style, get_template_directory_uri() . '/style.css' );
-    wp_register_script('google_adsense', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', array(), null, false);
-    wp_enqueue_script('google_adsense');
-	}
+    if( SHOW_DINJOB_ADS ){
+        wp_register_script('google_adsense', 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', array(), null, false);
+        wp_enqueue_script('google_adsense');
+    }
+}
 add_action( 'wp_enqueue_scripts', 'twenty_twenty_child_enqueue_child_styles' );
 
 /*Write here your own functions */
@@ -126,15 +129,15 @@ if( !function_exists('is_amp_endpoint')){
 if (!function_exists('google_analytics')){
     function google_analytics(){
         $output = <<<HTML
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104920476-5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104920476-5"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'UA-104920476-5');
-</script>
+        gtag('config', 'UA-104920476-5');
+        </script>
 HTML;
         if(function_exists('is_amp_endpoint')){
             if(!is_amp_endpoint()){
@@ -170,7 +173,7 @@ function prefix_insert_post_ads( $content ) {
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>';
  
-    if ( is_single() && ! is_admin() ) {
+    if ( is_single() && ! is_admin() && SHOW_DINJOB_ADS ) {
         return prefix_insert_after_paragraph( $ad_code, 5, 3, $content );
     }
      
